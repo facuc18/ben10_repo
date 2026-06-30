@@ -3,7 +3,7 @@ from models.userModel import Usuario
 from fastapi import  Depends,HTTPException
 from sqlalchemy.orm import Session
 from auth.password import hash_password,verify_password
-from auth.jwt_handler import create_access_token
+from auth.jwt_handler import create_access_token,verification_token_access
 
 
 
@@ -11,6 +11,12 @@ def obtener_usuario_por_username(username,db:Session):
     usuario = db.query(Usuario).filter(Usuario.username == username).first()
 
     return usuario
+
+def obtener_usuario_por_id(id,db:Session):
+   usuario = db.query(Usuario).filter(Usuario.id == id ).first()
+
+   return usuario
+   
     
 def register (data_user : UsuarioCreate,db:Session):
     usuario_existente = obtener_usuario_por_username(data_user.username,db)

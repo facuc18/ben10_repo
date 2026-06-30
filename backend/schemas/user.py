@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,ConfigDict
 
 class UsuarioCreate(BaseModel):
     username: str
@@ -12,3 +12,8 @@ class UsuarioLogin(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str
+
+class Usuarioinfo(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id:int
+    username:str

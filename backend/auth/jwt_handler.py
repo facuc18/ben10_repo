@@ -29,3 +29,9 @@ def create_access_token(user_id):
     return token
 
 
+def verification_token_access(token):
+    payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
+
+    user_id = payload["sub"]
+
+    return user_id
