@@ -11,7 +11,7 @@ from auth.Dependencies import get_current_user
 router = APIRouter()
 
 # GET /aliens → lista de aliens
-@router.get("/aliens",response_model=list[AlienLista],tags=["obtener todos los aliens"])
+@router.get("/aliens",response_model=list[AlienLista],)
 def get_aliens(db: Session = Depends(get_db),usuario = Depends(get_current_user)):
 
     # consulta a la base de datos

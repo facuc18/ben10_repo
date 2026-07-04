@@ -26,3 +26,5 @@ class Alien(Base):
 
     # relación: un alien puede tener muchos resultados de respuestas
     respuestas = relationship("RespuestaAlien", back_populates="alien")
+
+    favoritos = relationship("Favorito", back_populates="alien")
