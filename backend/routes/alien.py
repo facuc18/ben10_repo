@@ -3,15 +3,16 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from models.alienModel import Alien
-
 from schemas.alien import AlienDetalle,AlienLista, AparicionDetalle,TuAlienResult
+
+from auth.Dependencies import get_current_user
 
 # router = agrupador de endpoints
 router = APIRouter()
 
 # GET /aliens → lista de aliens
 @router.get("/aliens",response_model=list[AlienLista],tags=["obtener todos los aliens"])
-def get_aliens(db: Session = Depends(get_db)):
+def get_aliens(db: Session = Depends(get_db),usuario = Depends(get_current_user)):
 
     # consulta a la base de datos
     aliens = db.query(Alien).all()
@@ -20,7 +21,7 @@ def get_aliens(db: Session = Depends(get_db)):
     return aliens
 
 @router.get("/aliens/{id}",response_model=AlienDetalle)
-def get_by_id(id:int,db: Session = Depends(get_db)):
+def get_by_id(id:int,db: Session = Depends(get_db),usuario = Depends(get_current_user)):
 
     alien = db.query(Alien).filter(Alien.id == id).first()
 
@@ -54,7 +55,7 @@ def get_by_id(id:int,db: Session = Depends(get_db)):
     )
 
 @router.get("/tuAlien/{id}",response_model=TuAlienResult)
-def get_tuAlien(id:int,db : Session = Depends(get_db)):
+def get_tuAlien(id:int,db : Session = Depends(get_db),usuario = Depends(get_current_user)):
     tualien = db.query(Alien).filter(Alien.id == id).first()
 
     if tualien == None :
