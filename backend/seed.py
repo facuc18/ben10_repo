@@ -8,6 +8,8 @@ from models.aparicionModel import Aparicion
 from models.preguntaModel import Pregunta
 from models.respuestaAlienModel import RespuestaAlien
 from models.respuestaModel import Respuesta
+from models.userModel import Usuario
+from models.favoritoModel import Favorito
 
 db = SessionLocal()
 # =========================

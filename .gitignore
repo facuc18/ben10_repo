@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+*.db
+backend/static/images/perfiles/*
+!backend/static/images/perfiles/.gitkeep
+.venv/
+node_modules/

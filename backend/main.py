@@ -11,6 +11,7 @@ from models.respuestaModel import Respuesta
 from models.respuestaAlienModel import RespuestaAlien
 from models.serieModel import Series
 from models.favoritoModel import Favorito
+from models.userModel import Usuario
 
 from routes.alien import router as alienRouter
 from routes.preguntas import router as preguntaRouter
