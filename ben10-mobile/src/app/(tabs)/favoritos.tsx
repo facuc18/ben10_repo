@@ -30,18 +30,23 @@ export default function Favoritos() {
       refreshing={loading}
       onRefresh={() => refresh().catch(() => {})}
       renderItem={({ item }) => (
-        <Pressable
-          onPress={() => router.push({ pathname: '/alien/[id]', params: { id: String(item.id) } })}
-          style={({ pressed }) => [styles.row, pressed && { opacity: 0.75 }]}
-          accessibilityRole="button"
-        >
-          <Dial uri={alienImageUrl(item.imagen)} size={72} />
-          <View style={{ flex: 1, marginLeft: space.md }}>
-            <Text style={styles.name}>{item.nombre}</Text>
-            <Text style={styles.sub}>
-              {item.especie}, de {item.planeta}
-            </Text>
-          </View>
+        // La fila es un View y tiene DOS botones hermanos (abrir ficha / quitar):
+        // un botón dentro de otro no es válido en la web.
+        <View style={styles.row}>
+          <Pressable
+            onPress={() => router.push({ pathname: '/alien/[id]', params: { id: String(item.id) } })}
+            style={({ pressed }) => [styles.open, pressed && { opacity: 0.75 }]}
+            accessibilityRole="button"
+            accessibilityLabel={`Ver ficha de ${item.nombre}`}
+          >
+            <Dial uri={alienImageUrl(item.imagen)} size={72} />
+            <View style={{ flex: 1, marginLeft: space.md }}>
+              <Text style={styles.name}>{item.nombre}</Text>
+              <Text style={styles.sub}>
+                {item.especie}, de {item.planeta}
+              </Text>
+            </View>
+          </Pressable>
           <Pressable
             onPress={() => toggle(item).catch(() => {})}
             hitSlop={12}
@@ -50,7 +55,7 @@ export default function Favoritos() {
           >
             <Ionicons name="heart" size={26} color={colors.green} />
           </Pressable>
-        </Pressable>
+        </View>
       )}
     />
   );
@@ -59,6 +64,7 @@ export default function Favoritos() {
 const styles = StyleSheet.create({
   list: { padding: space.lg, maxWidth: 640, width: '100%', alignSelf: 'center' },
   row: { flexDirection: 'row', alignItems: 'center', paddingVertical: space.md, borderBottomWidth: 1, borderBottomColor: colors.line },
+  open: { flex: 1, flexDirection: 'row', alignItems: 'center' },
   name: { fontFamily: font.bold, fontSize: 18, color: colors.text },
   sub: { fontFamily: font.regular, fontSize: 14, color: colors.muted, marginTop: 2 },
 });
