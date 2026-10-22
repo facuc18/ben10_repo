@@ -30,7 +30,8 @@
         {
           "photosPermission": "Permite acceder a tus fotos para elegir tu foto de perfil."
         }
-      ]
+      ],
+      "expo-status-bar"
     ],
     "scheme": "ben10",
     "backgroundColor": "#0B140E"
